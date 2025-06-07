@@ -3,9 +3,9 @@ import {create} from "zustand";
 import {combine} from "zustand/middleware";
 
 interface IGameStore {
-  history: string[];
+  history: string[][];
   currentMove: number;
-  setHistory: (nextSquares: string[] | ((squares: string[]) => string[])) => void;
+  setHistory: (nextSquares: string[][] | ((squares: string[][]) => string[][])) => void;
   setCurrentMove: (nextMove: number | ((move: number) => number)) => void;
 }
 
@@ -38,15 +38,15 @@ export default function Game() {
     display: "flex",
     flexDirection: "row",
     fontFamily: "monospace, sans-serif"
-  }
+  } as const
 
-  function onHandlePlay(nextSquares) {
+  function onHandlePlay(nextSquares: string[]) {
     const nextHistory = history.slice(0, currentMove + 1).concat([nextSquares]);
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);
   }
 
-  function jumpTo(nextMove) {
+  function jumpTo(nextMove: number) {
     setCurrentMove(nextMove);
   }
 

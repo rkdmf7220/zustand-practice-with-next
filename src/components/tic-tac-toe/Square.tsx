@@ -1,4 +1,9 @@
-export default function Square({ value, onSquareClick }) {
+interface ISquareProps {
+  value: string;
+  onSquareClick: () => void;
+}
+
+export default function Square({ value, onSquareClick }: ISquareProps) {
   const squareStyle = {
     display: "inline-block",
     alignItems: "center",

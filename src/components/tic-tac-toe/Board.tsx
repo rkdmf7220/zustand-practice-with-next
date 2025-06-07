@@ -3,7 +3,13 @@
 import Square from './Square';
 import {calculateStatus, calculateTurns, calculateWinner} from "@/utils/calculate-winner";
 
-export default function Board({ xIsNext, squares, onPlay }) {
+interface IBoardProps {
+  xIsNext: boolean;
+  squares: string[];
+  onPlay: (nextSquares: string[]) => void;
+}
+
+export default function Board({ xIsNext, squares, onPlay }: IBoardProps) {
   const player = xIsNext ? 'X' : 'O';
   const winner = calculateWinner(squares);
   const turns = calculateTurns(squares);
